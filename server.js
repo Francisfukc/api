@@ -158,6 +158,24 @@ app.get('/api/users', async (req, res) => {
   }
 });
 
+// 7. Get API info/details
+app.get('/api/info', (req, res) => {
+  res.json({
+    name: 'Todo API',
+    version: '1.0.0',
+    description: 'A Node.js Express & MongoDB RESTful API for Todo management.',
+    endpoints: {
+      register: 'POST /api/register',
+      addTodo: 'POST /api/todos',
+      getTodos: 'GET /api/todos/:userId',
+      updateTodo: 'PUT /api/todos/:id',
+      deleteTodo: 'DELETE /api/todos/:id',
+      getUsers: 'GET /api/users',
+      apiInfo: 'GET /api/info'
+    }
+  });
+});
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
