@@ -151,10 +151,33 @@ app.get('/api/users', async (req, res) => {
   try {
     // Exclude passwords from response
     const users = await User.find({}, '-password'); 
-    res.json({ users });
+    res.status(200).json({ users });
   } catch (error) {
     console.error('Fetch Users error:', error);
     res.status(500).json({ error: 'Server error while fetching users' });
+  }
+});
+
+// 6.1 Get all todos
+app.get('/api/todos', async (req, res) => {
+  try {
+    const todos = await Todo.find({});
+    res.status(200).json({ todos });
+  } catch (error) {
+    console.error('Fetch All Todos error:', error);
+    res.status(500).json({ error: 'Server error while fetching all todos' });
+  }
+});
+
+// 6.2 Get all users and all todos combined
+app.get('/api/all-data', async (req, res) => {
+  try {
+    const users = await User.find({}, '-password'); 
+    const todos = await Todo.find({});
+    res.status(200).json({ users, todos });
+  } catch (error) {
+    console.error('Fetch All Data error:', error);
+    res.status(500).json({ error: 'Server error while fetching all data' });
   }
 });
 
